@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KRONOS MX · TESIS LEGADO 2099 · B5</title>
+    <style>
+        /* ===== RESET Y BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #080c0d;
+            color: #b8e6b8;
+            font-family: 'Courier New', 'Fira Code', monospace;
+            padding: 2rem 1.2rem;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 960px;
+            width: 100%;
+            background: #0f1618;
+            border: 1px solid #1e3028;
+            border-radius: 24px;
+            padding: 2rem 2rem 1.5rem;
+            box-shadow: 0 0 40px rgba(0, 200, 80, 0.05);
+        }
+
+        /* ===== ENCABEZADO ===== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 2px solid #1a2a22;
+            padding-bottom: 0.8rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-left h1 {
+            font-weight: 400;
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+            color: #8fdf8f;
+            text-shadow: 0 0 12px #1a4a2a;
+        }
+
+        .header-left .sub {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            color: #4a7a4a;
+            text-transform: uppercase;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .header-right .badge {
+            background: #1a2a22;
+            padding: 0.2rem 1.4rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            border: 1px solid #2a5a3a;
+            color: #8fdf8f;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+        }
+
+        .header-right .tesis-tag {
+            font-size: 0.6rem;
+            color: #5a8a5a;
+            margin-top: 0.3rem;
+            letter-spacing: 1px;
+        }
+
+        /* ===== PILARES DE LA TESIS ===== */
+        .pilares {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.6rem;
+            background: #0a1212;
+            padding: 1rem 1.2rem;
+            border-radius: 16px;
+            border: 1px solid #1a2a22;
+            margin-bottom: 1.8rem;
+        }
+
+        .pilar {
+            text-align: center;
+            padding: 0.4rem 0;
+        }
+
+        .pilar .nombre {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #7fbf7f;
+            text-transform: uppercase;
+        }
+
+        .pilar .id {
+            font-size: 0.55rem;
+            color: #4a7a4a;
+            background: #0a1212;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            border: 1px solid #1a2a22;
+            display: inline-block;
+            margin-top: 0.2rem;
+            word-break: break-all;
+        }
+
+        .pilar.destacado {
+            border-left: 2px solid #2a5a3a;
+            border-right: 2px solid #2a5a3a;
+        }
+
+        /* ===== ANCLAJE Y WHITEPAPER ===== */
+        .anclaje-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            background: #0d1618;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            border: 1px solid #1a2a22;
+            margin-bottom: 1.8rem;
+            font-size: 0.7rem;
+            gap: 0.5rem;
+        }
+
+        .anclaje-row .label {
+            color: #4a7a4a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .anclaje-row .value {
+            color: #b0e6b0;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .anclaje-row .tx {
+            color: #6a9a6a;
+            font-size: 0.65rem;
+        }
+
+        .anclaje-row .whitepaper {
+            background: #1a2a22;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            border: 1px solid #2a5a3a;
+            color: #8fdf8f;
+            text-decoration: none;
+            font-size: 0.7rem;
+        }
+
+        .anclaje-row .whitepaper:hover {
+            background: #2a4a3a;
+        }
+
+        /* ===== INFO FUNDACIONAL ===== */
+        .fundacional {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem 2.5rem;
+            background: #0d1416;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #1a2a22;
+            margin-bottom: 1.8rem;
+            font-size: 0.8rem;
+        }
+
+        .fundacional span {
+            color: #7fbf7f;
+        }
+
+        .fundacional .num {
+            color: #c0ffc0;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* ===== GENERADOR (TOOL) ===== */
+        .tool-section {
+            background: #0a1212;
+            padding: 1.5rem 1.5rem 1.2rem;
+            border-radius: 16px;
+            border: 1px solid #1a2a22;
+            margin-bottom: 1.8rem;
+        }
+
+        .tool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tool-header h2 {
+            font-weight: 400;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            color: #8fdf8f;
+        }
+
+        .tool-header .version {
+            font-size: 0.6rem;
+            color: #4a7a4a;
+            background: #0a1212;
+            padding: 0.1rem 0.8rem;
+            border-radius: 30px;
+            border: 1px solid #1a2a22;
+        }
+
+        .status-row {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            background: #0d1416;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            border: 1px solid #1a2a22;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .led {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #00cc44;
+            box-shadow: 0 0 14px #00cc44aa;
+            transition: 0.2s;
+            flex-shrink: 0;
+        }
+
+        .led.rojo {
+            background: #cc3333;
+            box-shadow: 0 0 14px #cc3333aa;
+        }
+
+        .folio-actual {
+            font-weight: 600;
+            font-size: 1.1rem;
+            background: #0a1212;
+            padding: 0.1rem 1rem;
+            border-radius: 30px;
+            border: 1px solid #1a2a22;
+        }
+
+        .hash-display {
+            font-size: 0.65rem;
+            color: #6a9a6a;
+            background: #0a1212;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            border: 1px solid #1a2a22;
+            word-break: break-all;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .qr-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .qr-box {
+            background: #fff;
+            padding: 4px;
+            border-radius: 8px;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .qr-box img {
+            width: 100%;
+            height: 100%;
+            image-rendering: pixelated;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            flex: 1;
+        }
+
+        .btn {
+            background: transparent;
+            border: 1px solid #2a4a3a;
+            color: #b0e6b0;
+            padding: 0.3rem 1.2rem;
+            border-radius: 30px;
+            font-family: inherit;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.15s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            background: #1a2a22;
+            border-color: #4a8a4a;
+            box-shadow: 0 0 12px #1a4a2a55;
+        }
+
+        .btn-primary {
+            background: #1a2a22;
+            border-color: #3a7a3a;
+        }
+
+        .btn-primary:hover {
+            background: #2a4a3a;
+        }
+
+        .btn-danger {
+            border-color: #5a3a3a;
+            color: #ff9a9a;
+        }
+
+        .btn-danger:hover {
+            background: #2a1a1a;
+            border-color: #8a5555;
+        }
+
+        /* ===== VERIFICADOR ===== */
+        .verifier {
+            background: #0d1416;
+            padding: 1.2rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #1a2a22;
+            margin-bottom: 1.8rem;
+        }
+
+        .verifier h3 {
+            font-weight: 400;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.6rem;
+            color: #6a9a6a;
+        }
+
+        .verifier .input-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .verifier input {
+            flex: 1;
+            background: #0a1212;
+            border: 1px solid #1a2a22;
+            color: #b0e6b0;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-family: inherit;
+            font-size: 0.8rem;
+            min-width: 180px;
+        }
+
+        .verifier input:focus {
+            outline: none;
+            border-color: #3a7a3a;
+        }
+
+        .verifier .result {
+            margin-top: 0.8rem;
+            font-size: 0.8rem;
+            background: #0a1212;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            border: 1px solid #1a2a22;
+            min-height: 2.4rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .small-led {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            display: inline-block;
+            background: #333;
+            flex-shrink: 0;
+        }
+
+        .small-led.green {
+            background: #00cc44;
+            box-shadow: 0 0 8px #00cc44aa;
+        }
+
+        .small-led.red {
+            background: #cc3333;
+            box-shadow: 0 0 8px #cc3333aa;
+        }
+
+        /* ===== LEGAL Y FOOTER ===== */
+        .legal {
+            font-size: 0.55rem;
+            color: #4a6a4a;
+            border-top: 1px solid #1a2a22;
+            padding-top: 1.2rem;
+            margin-top: 0.5rem;
+            text-align: center;
+            line-height: 1.8;
+            letter-spacing: 0.3px;
+        }
+
+        .legal strong {
+            color: #6a8a6a;
+        }
+
+        .legal a {
+            color: #6a9a6a;
+            text-decoration: none;
+            border-bottom: 1px dotted #2a4a3a;
+        }
+
+        .legal a:hover {
+            color: #b0e6b0;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            font-size: 0.65rem;
+            margin: 0.4rem 0 0.2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links span {
+            color: #3a5a3a;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 700px) {
+            .container {
+                padding: 1.2rem;
+            }
+            .pilares {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.3rem;
+            }
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+            .header-right {
+                text-align: left;
+                width: 100%;
+            }
+            .qr-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .qr-box {
+                align-self: center;
+            }
+            .btn-group {
+                justify-content: center;
+            }
+            .anclaje-row {
+                flex-direction: column;
+                align-items: flex-start;
+                border-radius: 16px;
+            }
+            .fundacional {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+            .status-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pilares {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ===== HEADER ===== -->
+    <div class="header">
+        <div class="header-left">
+            <h1>⬡ KRONOS MX CORE</h1>
+            <span class="sub">TESIS · LEGADO 2099 · PROTOCOLO B5 UNIFICADO</span>
+        </div>
+        <div class="header-right">
+            <span class="badge">VERDE 0 · ACTIVO</span>
+            <div class="tesis-tag">NIVEL PRIMUS XII · ANCLAJE ETEREO</div>
+        </div>
+    </div>
+
+    <!-- ===== PILARES ARQUITECTÓNICOS ===== -->
+    <div class="pilares">
+        <div class="pilar">
+            <div class="nombre">ACTA</div>
+            <span class="id">2607086319439</span>
+        </div>
+        <div class="pilar">
+            <div class="nombre">ARQ</div>
+            <span class="id">2607146379465</span>
+        </div>
+        <div class="pilar destacado">
+            <div class="nombre">SELLO</div>
+            <span class="id">2608056639878</span>
+        </div>
+        <div class="pilar">
+            <div class="nombre">PROTOCOLO</div>
+            <span class="id">2608096674952</span>
+        </div>
+        <div class="pilar">
+            <div class="nombre">CONSTITUCIÓN</div>
+            <span class="id">72258 62335</span>
+        </div>
+    </div>
+
+    <!-- ===== ANCLAJE Y WHITEPAPER ===== -->
+    <div class="anclaje-row">
+        <span class="label">⧫ Anclaje Etereum</span>
+        <span class="value">2608096674952</span>
+        <span class="tx">TX: 0x8ca8... | 0xd2c2... | 0xd94b... | 0x7ef5...</span>
+        <a href="#" class="whitepaper" onclick="alert('FDV-2026-OBRA-EL-OJO-SAGRADO-V2 · Whitepaper de la tesis')">📄 FDV-2026-OBRA-EL-OJO-SAGRADO-V2</a>
+    </div>
+
+    <!-- ===== ID FUNDACIONAL ===== -->
+    <div class="fundacional">
+        <span><span class="num">72258 62335</span> · ID Fundacional</span>
+        <span><span class="num">KR-0001</span> · Constancia Fundador</span>
+        <span><span class="num">B5</span> · Unificado</span>
+        <span>Fábrica: <span class="num">FVD-(MARCA)</span></span>
+    </div>
+
+    <!-- ===== HERRAMIENTA GENERADOR / VERIFICADOR (TESIS) ===== -->
+    <div class="tool-section">
+        <div class="tool-header">
+            <h2>✦ GENERADOR KRMV v2.1 · FOLIO UNIVERSAL</h2>
+            <span class="version">Lógica irreversible · Correlativo único</span>
+        </div>
+
+        <!-- Estado -->
+        <div class="status-row">
+            <span class="led" id="led"></span>
+            <span id="estadoTexto" style="font-weight:600;">ACTIVO</span>
+            <span class="folio-actual" id="folioDisplay">KRMV-KRONOS-0000001</span>
+            <span class="hash-display" id="hashDisplay">—</span>
+        </div>
+
+        <!-- QR y botones -->
+        <div class="qr-actions">
+            <div class="qr-box">
+                <img id="qrImg" src="" alt="QR" />
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" id="btnNuevo">✦ GENERAR NUEVO</button>
+                <button class="btn" id="btnDescargarJSON">⬇ DESCARGAR JSON</button>
+                <button class="btn btn-danger" id="btnReset">⟲ RESET</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== VERIFICADOR ===== -->
+    <div class="verifier">
+        <h3>🔍 VERIFICAR ESTADO 0/1 · ANCLAJE 2608096674952</h3>
+        <div class="input-row">
+            <input type="text" id="inputVerificar" placeholder="Ej. KRMV-KRONOS-0000001" value="KRMV-KRONOS-0000001" />
+            <button class="btn btn-primary" id="btnVerificar">CONSULTAR</button>
+        </div>
+        <div class="result" id="resultadoVerificacion">
+            <span class="small-led" id="ledVerif"></span>
+            <span id="textoVerif">Ingresa un folio y presiona Consultar</span>
+        </div>
+    </div>
+
+    <!-- ===== LEGAL ===== -->
+    <div class="legal">
+        <p><strong>AVISO LEGAL — ENTIDAD PRIVADA NO GUBERNAMENTAL</strong></p>
+        <p>
+            Entidad Tecnológica Privada Kronos MX Core. No gubernamental. No emite documentos oficiales de identidad (INE, CURP, Pasaporte).<br />
+            Constancias de membresía privada interna. <strong>Registro Safe Creative + Anclaje Ethereum.</strong> Arquitectura Jurídica Activa.
+        </p>
+        <div class="footer-links">
+            <span>TX verificables: 0x8ca8... | 0xd2c2... | 0xd94b... | 0x7ef5... → ETHERSCAN</span>
+            <a href="https://kronosproyect.github.io" target="_blank">kronosproyect.github.io</a>
+            <span>|</span>
+            <span>Protocolo B5 · Constitución</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ===== ESTADO =====
+        const BASE = 'KRMV-KRONOS-';
+        const STORAGE_KEY = 'kronos_tesis_registry';
+
+        let currentNum = 1;
+
+        // Cargar último número
+        function loadNum() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                    const data = JSON.parse(raw);
+                    if (data && typeof data.ultimo === 'number') {
+                        currentNum = data.ultimo;
+                    }
+                }
+            } catch (_) {}
+        }
+
+        function saveNum() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify({ ultimo: currentNum }));
+            } catch (_) {}
+        }
+
+        function pad(n, len = 7) {
+            return String(n).padStart(len, '0');
+        }
+
+        function getFolio(n) {
+            return BASE + pad(n);
+        }
+
+        // SHA-256
+        async function sha256(text) {
+            const enc = new TextEncoder();
+            const buf = await crypto.subtle.digest('SHA-256', enc.encode(text));
+            return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        function nowISO() {
+            return new Date().toISOString();
+        }
+
+        // ===== UI =====
+        async function render(num) {
+            const folio = getFolio(num);
+            const ts = nowISO();
+            const hash = await sha256(folio + ts);
+
+            document.getElementById('folioDisplay').textContent = folio;
+            document.getElementById('hashDisplay').textContent = hash;
+            document.getElementById('inputVerificar').value = folio;
+
+            // LED verde siempre (simula activo)
+            const led = document.getElementById('led');
+            led.className = 'led';
+            document.getElementById('estadoTexto').textContent = 'ACTIVO · VERDE 0';
+
+            // QR
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(folio)}`;
+            document.getElementById('qrImg').src = qrUrl;
+
+            saveNum();
+        }
+
+        // ===== ACCIONES =====
+        async function nuevo() {
+            currentNum += 1;
+            await render(currentNum);
+        }
+
+        async function reset() {
+            if (confirm('¿Restablecer al folio inicial KRMV-KRONOS-0000001?')) {
+                currentNum = 1;
+                await render(1);
+            }
+        }
+
+        async function descargarJSON() {
+            const num = currentNum;
+            const folio = getFolio(num);
+            const ts = nowISO();
+            const hash = await sha256(folio + ts);
+
+            const obj = {
+                folio: folio,
+                hash: hash,
+                timestamp: ts,
+                titular: 'Titular Privado',
+                marca: 'KRONOS',
+                fabricante: 'Kronos MX Core - ID 7225862335 - Toluca HQ',
+                vigencia: '2027-08-14',
+                estado: 0,
+                anclaje: '2608096674952',
+                whitepaper: 'FDV-2026-OBRA-EL-OJO-SAGRADO-V2',
+                protocolo: 'B5 Unificado',
+                id_fundacional: '72258 62335'
+            };
+
+            const blob = new Blob([JSON.stringify(obj, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${folio}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        async function verificar() {
+            const input = document.getElementById('inputVerificar').value.trim();
+            const led = document.getElementById('ledVerif');
+            const texto = document.getElementById('textoVerif');
+
+            if (!input) {
+                led.className = 'small-led';
+                texto.textContent = '❌ Ingresa un folio.';
+                return;
+            }
+
+            const match = input.match(/KRMV-KRONOS-(\d+)/);
+            if (!match) {
+                led.className = 'small-led red';
+                texto.textContent = '❌ Formato inválido. Debe ser KRMV-KRONOS-000000X';
+                return;
+            }
+
+            const num = parseInt(match[1], 10);
+            if (num > 0 && num <= currentNum) {
+                const ts = nowISO();
+                const hash = await sha256(input + ts);
+                led.className = 'small-led green';
+                texto.innerHTML = `✅ <strong>${input}</strong> existe en el registro. Hash: <span style="font-size:0.65rem;">${hash.slice(0, 20)}…</span> (VERDE 0 · ACTIVO)`;
+            } else {
+                led.className = 'small-led red';
+                texto.textContent = `❌ ${input} — NO ENCONTRADO (ROJO 1) · No existe en el registro.`;
+            }
+        }
+
+        // ===== INIT =====
+        async function init() {
+            loadNum();
+            if (currentNum < 1) currentNum = 1;
+            await render(currentNum);
+
+            document.getElementById('btnNuevo').addEventListener('click', nuevo);
+            document.getElementById('btnReset').addEventListener('click', reset);
+            document.getElementById('btnDescargarJSON').addEventListener('click', descargarJSON);
+            document.getElementById('btnVerificar').addEventListener('click', verificar);
+            document.getElementById('inputVerificar').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') verificar();
+            });
+        }
+
+        init();
+    })();
+</script>
+
+</body>
+</html>
