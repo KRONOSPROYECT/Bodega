@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SWRIA Quantum-Link Registry</title>
+    <style>
+        /* ─── RESET Y VARIABLES ─── */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0a0a0a;
+            --card: #111111;
+            --gold: #d4af37;
+            --gold-light: #f5e56b;
+            --muted: #9aa0a6;
+            --border: #1f1f1f;
+            --radius: 12px;
+            --shadow: 0 8px 32px rgba(0,0,0,0.6);
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: #eaeaea;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem;
+            background-image: radial-gradient(circle at 20% 50%, #1a1a1a 0%, #0a0a0a 100%);
+        }
+        a { color: var(--gold); text-decoration: none; }
+        a:hover { color: var(--gold-light); }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        /* ─── HEADER ─── */
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 0 1rem;
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+        .logo {
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .logo small {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 400;
+            letter-spacing: 4px;
+            -webkit-text-fill-color: var(--muted);
+            color: var(--muted);
+        }
+        .badge {
+            display: inline-block;
+            background: var(--card);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.2rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 0.5rem 0;
+        }
+        .sub {
+            font-size: 0.8rem;
+            color: var(--muted);
+            letter-spacing: 3px;
+        }
+
+        /* ─── PILARES ─── */
+        .pilares {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.8rem;
+            margin: 1.5rem 0 2rem;
+        }
+        .pilar {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 0.8rem 0.5rem;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .pilar:hover { border-color: var(--gold); }
+        .pilar .nombre {
+            font-size: 0.65rem;
+            color: var(--muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .pilar .id {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #fff;
+            display: block;
+            margin-top: 0.2rem;
+        }
+        .pilar.destacado {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        /* ─── MÓDULOS ─── */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+        .card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+        .card label {
+            font-size: 0.75rem;
+            color: var(--muted);
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+        .card input {
+            width: 100%;
+            padding: 0.6rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: #0e0e0e;
+            color: #eaeaea;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+        .card input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        .btn {
+            background: var(--gold);
+            color: #0a0a0a;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.85rem;
+        }
+        .btn:hover { background: var(--gold-light); transform: scale(1.02); }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .result-box {
+            margin-top: 0.8rem;
+            padding: 0.8rem;
+            border-radius: 6px;
+            background: #0e0e0e;
+            font-size: 0.85rem;
+            min-height: 50px;
+            color: var(--muted);
+            border-left: 3px solid var(--border);
+        }
+        .result-box.success { border-color: #4caf50; color: #4caf50; }
+        .result-box.error { border-color: #f44336; color: #f44336; }
+        .result-box.loading { border-color: var(--gold); color: var(--gold); }
+
+        /* ─── LEGAL ─── */
+        .legal {
+            margin-top: 2.5rem;
+            padding: 1.5rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.7rem;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+        .legal strong { color: #888; }
+        .legal .footer-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 0.8rem;
+            font-size: 0.65rem;
+        }
+        .legal .footer-links span { color: #444; }
+
+        footer {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #444;
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+        footer a { color: var(--gold); }
+
+        .version-tag {
+            display: inline-block;
+            background: #1a1a1a;
+            color: var(--muted);
+            padding: 0.15rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.6rem;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 480px) {
+            .logo { font-size: 1.8rem; }
+            .pilares { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ═══ HEADER ═══ -->
+    <header>
+        <div class="logo">
+            ⬡ SWRIA QUANTUM-LINK REGISTRY
+            <small>IDENTIDAD DIGITAL · TRAZABILIDAD · INTEGRIDAD EMPRESARIAL</small>
+        </div>
+        <div class="badge">SISTEMA PRIVADO ACTIVO</div>
+        <div class="version-tag">ARQUITECTURA QUANTUM-READY · CADENA CRIPTOGRÁFICA</div>
+        <div style="margin-top:0.5rem; font-size:0.65rem; color:#444;">
+            Registro privado · Cadena de hashes encadenados · Integridad verificable
+        </div>
+    </header>
+
+    <!-- ═══ PILARES ═══ -->
+    <div class="pilares">
+        <div class="pilar">
+            <div class="nombre">IDENTIDAD</div>
+            <span class="id">ID-EMPRESA</span>
+        </div>
+        <div class="pilar">
+            <div class="nombre">REGISTRO</div>
+            <span class="id">FOLIO-ÚNICO</span>
+        </div>
+        <div class="pilar destacado">
+            <div class="nombre">INTEGRIDAD</div>
+            <span class="id">HASH-ENCADENADO</span>
+        </div>
+        <div class="pilar">
+            <div class="nombre">AUDITORÍA</div>
+            <span class="id">TRAZABILIDAD</span>
+        </div>
+        <div class="pilar">
+            <div class="nombre">EVIDENCIA</div>
+            <span class="id">SELLO-TEMPORAL</span>
+        </div>
+    </div>
+
+    <!-- ═══ GRID ═══ -->
+    <div class="grid">
+        <!-- GENERAR -->
+        <div class="card">
+            <h3>📋 GENERAR REGISTRO</h3>
+            <label>Tipo de registro (opcional)</label>
+            <input type="text" id="tipoRegistro" value="REGISTRO_EMPRESARIAL" />
+            <button class="btn" id="btnGenerar">CREAR REGISTRO</button>
+            <div id="resultadoGenerar" class="result-box">Listo para generar.</div>
+        </div>
+
+        <!-- VERIFICAR -->
+        <div class="card">
+            <h3>🔍 VERIFICAR REGISTRO</h3>
+            <label>Folio (ej. SWRIA-QREG-00000001)</label>
+            <input type="text" id="folioVerificar" placeholder="SWRIA-QREG-00000001" />
+            <button class="btn" id="btnVerificar">CONSULTAR INTEGRIDAD</button>
+            <div id="resultadoVerificar" class="result-box">Ingresa un folio.</div>
+        </div>
+    </div>
+
+    <!-- ═══ ÚLTIMOS REGISTROS ═══ -->
+    <div class="card" style="margin-top:1.5rem;">
+        <h3>📜 ÚLTIMOS REGISTROS</h3>
+        <button class="btn" id="btnRecargar" style="margin-bottom:0.8rem;">RECARGAR LISTA</button>
+        <div id="listaRegistros" style="font-size:0.8rem; color:var(--muted); max-height:200px; overflow-y:auto;">
+            <div style="color:#444;">Cargando registros...</div>
+        </div>
+    </div>
+
+    <!-- ═══ REVOCAR ═══ -->
+    <div class="card" style="margin-top:1.5rem;">
+        <h3>🚫 REVOCAR REGISTRO</h3>
+        <label>Folio a revocar</label>
+        <input type="text" id="folioRevocar" placeholder="SWRIA-QREG-00000001" />
+        <button class="btn" id="btnRevocar">REVOCAR</button>
+        <div id="resultadoRevocar" class="result-box">Ingresa un folio para revocar.</div>
+    </div>
+
+    <!-- ═══ AVISO LEGAL ═══ -->
+    <div class="legal">
+        <strong>AVISO LEGAL Y CONDICIONES DE USO</strong>
+        <p>
+            SWRIA Quantum-Link Registry es un sistema privado de trazabilidad criptográfica diseñado
+            para vincular registros empresariales mediante hashes encadenados, sellos de tiempo y
+            mecanismos de verificación de integridad.
+        </p>
+        <p>
+            La denominación <strong>“Quantum-Ready”</strong> describe una arquitectura preparada para
+            incorporar algoritmos criptográficos resistentes a ataques de computación cuántica.
+            No implica el uso actual de computación cuántica, comunicación cuántica ni certificación
+            por una autoridad cuántica.
+        </p>
+        <p>
+            Los registros generados no sustituyen documentos oficiales, firmas electrónicas cualificadas,
+            certificados gubernamentales ni instrumentos notariales. Su valor probatorio dependerá de
+            la legislación aplicable, los controles de acceso, la conservación de evidencias y los acuerdos
+            entre las partes.
+        </p>
+        <div class="footer-links">
+            <span>Registro privado empresarial</span>
+            <span>|</span>
+            <span>Cadena criptográfica verificable</span>
+            <span>|</span>
+            <span>Quantum-Ready</span>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 SWRIA · Quantum-Link Registry · Tecnología de trazabilidad</p>
+        <p style="margin-top:0.3rem; font-size:0.6rem; color:#333;">
+            <a href="#">Términos de uso</a> · <a href="#">Política de privacidad</a> · <a href="#">Contacto</a>
+        </p>
+    </footer>
+
+</div>
+
+<script>
+    // ─────────────────────────────────────────────────────────────
+    // SWRIA QUANTUM-LINK REGISTRY - FRONTEND CON API
+    // ─────────────────────────────────────────────────────────────
+
+    const API_BASE = window.location.origin + '/api/records';
+
+    // ─── Utilidades ──────────────────────────────────────────────
+    function escapeHTML(value) {
+        return String(value)
+            .replaceAll('&', '&amp;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;')
+            .replaceAll('"', '&quot;')
+            .replaceAll("'", '&#039;');
+    }
+
+    function validarFolio(folio) {
+        return /^SWRIA-QREG-\d{8}$/.test(folio.trim().toUpperCase());
+    }
+
+    function mostrarResultado(elemento, tipo, mensaje) {
+        elemento.className = 'result-box ' + tipo;
+        elemento.innerHTML = mensaje;
+    }
+
+    // ─── API Calls ──────────────────────────────────────────────
+
+    async function crearRegistro(tipo) {
+        const resultado = document.getElementById('resultadoGenerar');
+        const boton = document.getElementById('btnGenerar');
+
+        boton.disabled = true;
+        boton.textContent = 'CREANDO...';
+        mostrarResultado(resultado, 'loading', '⏳ Creando registro...');
+
+        try {
+            const response = await fetch(API_BASE, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ tipo: tipo || 'REGISTRO_EMPRESARIAL' })
+            });
+
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.detail || data.message || 'Error al crear');
+
+            mostrarResultado(resultado, 'success', `
+                ✅ <strong>Registro creado correctamente</strong><br>
+                <strong>Folio:</strong> ${escapeHTML(data.folio)}<br>
+                <strong>Hash:</strong> ${escapeHTML(data.hash_actual.slice(0, 24))}…<br>
+                <strong>Timestamp:</strong> ${escapeHTML(data.timestamp)}
+            `);
+            cargarUltimosRegistros();
+
+        } catch (error) {
+            mostrarResultado(resultado, 'error', `❌ ${escapeHTML(error.message)}`);
+        } finally {
+            boton.disabled = false;
+            boton.textContent = 'CREAR REGISTRO';
+        }
+    }
+
+    async function verificarRegistro(folio) {
+        const resultado = document.getElementById('resultadoVerificar');
+        const input = document.getElementById('folioVerificar');
+        const folioLimpio = folio.trim().toUpperCase();
+
+        if (!validarFolio(folioLimpio)) {
+            mostrarResultado(resultado, 'error', '⚠️ Formato inválido. Usa SWRIA-QREG-00000001.');
+            input.focus();
+            return;
+        }
+
+        mostrarResultado(resultado, 'loading', '⏳ Consultando integridad...');
+
+        try {
+            const response = await fetch(`${API_BASE}/${encodeURIComponent(folioLimpio)}`);
+            const data = await response.json();
+
+            if (response.status === 404) {
+                mostrarResultado(resultado, 'error', '❌ Registro no encontrado.');
+                return;
+            }
+            if (!response.ok) throw new Error(data.detail || data.message || 'Error de consulta');
+
+            const integridad = data.integridad_valida;
+            mostrarResultado(resultado, integridad ? 'success' : 'error', `
+                <strong>${integridad ? '✅ REGISTRO AUTÉNTICO' : '❌ INTEGRIDAD NO CONFIRMADA'}</strong><br>
+                <strong>Estado:</strong> ${escapeHTML(data.estado)}<br>
+                <strong>Fecha:</strong> ${escapeHTML(data.timestamp)}<br>
+                <strong>Hash:</strong> ${escapeHTML(data.hash_actual.slice(0, 24))}…<br>
+                <span style="font-size:0.7rem; color:#555;">${escapeHTML(data.mensaje)}</span>
+            `);
+
+        } catch (error) {
+            mostrarResultado(resultado, 'error', `❌ ${escapeHTML(error.message)}`);
+        }
+    }
+
+    async function revocarRegistro(folio) {
+        const resultado = document.getElementById('resultadoRevocar');
+        const folioLimpio = folio.trim().toUpperCase();
+
+        if (!validarFolio(folioLimpio)) {
+            mostrarResultado(resultado, 'error', '⚠️ Formato inválido. Usa SWRIA-QREG-00000001.');
+            return;
+        }
+
+        mostrarResultado(resultado, 'loading', '⏳ Revocando registro...');
+
+        try {
+            const response = await fetch(`${API_BASE}/${encodeURIComponent(folioLimpio)}/revoke`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.detail || data.message || 'Error al revocar');
+
+            mostrarResultado(resultado, 'success', `✅ ${escapeHTML(data.mensaje)}`);
+            cargarUltimosRegistros();
+
+        } catch (error) {
+            mostrarResultado(resultado, 'error', `❌ ${escapeHTML(error.message)}`);
+        }
+    }
+
+    async function cargarUltimosRegistros(limit = 10) {
+        const container = document.getElementById('listaRegistros');
+        container.innerHTML = '<div style="color:#444;">Cargando...</div>';
+
+        try {
+            const response = await fetch(`${API_BASE}?limit=${limit}`);
+            const data = await response.json();
+            if (!response.ok) throw new Error('Error al cargar registros');
+
+            if (!data.length) {
+                container.innerHTML = '<div style="color:#444;">No hay registros aún.</div>';
+                return;
+            }
+
+            container.innerHTML = data.map(r => `
+                <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid #1a1a1a;">
+                    <span style="color:var(--gold);">${escapeHTML(r.folio)}</span>
+                    <span style="color:#555; font-size:0.7rem;">${escapeHTML(r.timestamp.slice(0,10))}</span>
+                    <span style="color:${r.estado === 'ACTIVO' ? '#4caf50' : '#f44336'}; font-size:0.7rem;">${escapeHTML(r.estado)}</span>
+                </div>
+            `).join('');
+
+        } catch (error) {
+            container.innerHTML = `<div style="color:#f44336;">❌ ${escapeHTML(error.message)}</div>`;
+        }
+    }
+
+    // ─── Eventos ──────────────────────────────────────────────────
+
+    document.getElementById('btnGenerar').addEventListener('click', () => {
+        const tipo = document.getElementById('tipoRegistro').value.trim() || 'REGISTRO_EMPRESARIAL';
+        crearRegistro(tipo);
+    });
+
+    document.getElementById('btnVerificar').addEventListener('click', () => {
+        const input = document.getElementById('folioVerificar');
+        verificarRegistro(input.value);
+    });
+
+    document.getElementById('btnRevocar').addEventListener('click', () => {
+        const input = document.getElementById('folioRevocar');
+        revocarRegistro(input.value);
+    });
+
+    document.getElementById('btnRecargar').addEventListener('click', () => {
+        cargarUltimosRegistros();
+    });
+
+    // Enter en campos
+    document.getElementById('tipoRegistro').addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') document.getElementById('btnGenerar').click();
+    });
+    document.getElementById('folioVerificar').addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') document.getElementById('btnVerificar').click();
+    });
+    document.getElementById('folioRevocar').addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') document.getElementById('btnRevocar').click();
+    });
+
+    // ─── Inicializar ──────────────────────────────────────────────
+    cargarUltimosRegistros();
+</script>
+</body>
+</html>
