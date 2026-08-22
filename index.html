@@ -3,787 +3,558 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KRONOS MX · TESIS LEGADO 2099 · B5</title>
+    <title>SWRIA Quantum Registry · Identidad Digital Empresarial</title>
     <style>
-        /* ===== RESET Y BASE ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* ─── RESET Y VARIABLES ─── */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0a0a0a;
+            --card: #111111;
+            --gold: #d4af37;
+            --gold-light: #f5e56b;
+            --muted: #9aa0a6;
+            --border: #1f1f1f;
+            --radius: 12px;
+            --shadow: 0 8px 32px rgba(0,0,0,0.6);
         }
-
         body {
-            background: #080c0d;
-            color: #b8e6b8;
-            font-family: 'Courier New', 'Fira Code', monospace;
-            padding: 2rem 1.2rem;
-            display: flex;
-            justify-content: center;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: #eaeaea;
             min-height: 100vh;
-        }
-
-        .container {
-            max-width: 960px;
-            width: 100%;
-            background: #0f1618;
-            border: 1px solid #1e3028;
-            border-radius: 24px;
-            padding: 2rem 2rem 1.5rem;
-            box-shadow: 0 0 40px rgba(0, 200, 80, 0.05);
-        }
-
-        /* ===== ENCABEZADO ===== */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            border-bottom: 2px solid #1a2a22;
-            padding-bottom: 0.8rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .header-left {
             display: flex;
             flex-direction: column;
+            align-items: center;
+            padding: 1.5rem;
+            background-image: radial-gradient(circle at 20% 50%, #1a1a1a 0%, #0a0a0a 100%);
+        }
+        a { color: var(--gold); text-decoration: none; }
+        a:hover { color: var(--gold-light); }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
         }
 
-        .header-left h1 {
-            font-weight: 400;
-            font-size: 1.6rem;
+        /* ─── HEADER ─── */
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 0 1rem;
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+        .logo {
+            font-size: 2.4rem;
+            font-weight: 700;
             letter-spacing: 3px;
-            color: #8fdf8f;
-            text-shadow: 0 0 12px #1a4a2a;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-
-        .header-left .sub {
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            color: #4a7a4a;
-            text-transform: uppercase;
+        .logo small {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 400;
+            letter-spacing: 4px;
+            -webkit-text-fill-color: var(--muted);
+            color: var(--muted);
         }
-
-        .header-right {
-            text-align: right;
-        }
-
-        .header-right .badge {
-            background: #1a2a22;
-            padding: 0.2rem 1.4rem;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            border: 1px solid #2a5a3a;
-            color: #8fdf8f;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .badge {
             display: inline-block;
+            background: var(--card);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.2rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 0.5rem 0;
+        }
+        .sub {
+            font-size: 0.8rem;
+            color: var(--muted);
+            letter-spacing: 3px;
         }
 
-        .header-right .tesis-tag {
-            font-size: 0.6rem;
-            color: #5a8a5a;
-            margin-top: 0.3rem;
-            letter-spacing: 1px;
-        }
-
-        /* ===== PILARES DE LA TESIS ===== */
+        /* ─── PILARES ─── */
         .pilares {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 0.6rem;
-            background: #0a1212;
-            padding: 1rem 1.2rem;
-            border-radius: 16px;
-            border: 1px solid #1a2a22;
-            margin-bottom: 1.8rem;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.8rem;
+            margin: 1.5rem 0 2rem;
         }
-
         .pilar {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 0.8rem 0.5rem;
             text-align: center;
-            padding: 0.4rem 0;
+            transition: 0.3s;
         }
-
+        .pilar:hover { border-color: var(--gold); }
         .pilar .nombre {
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: #7fbf7f;
-            text-transform: uppercase;
-        }
-
-        .pilar .id {
-            font-size: 0.55rem;
-            color: #4a7a4a;
-            background: #0a1212;
-            padding: 0.1rem 0.4rem;
-            border-radius: 4px;
-            border: 1px solid #1a2a22;
-            display: inline-block;
-            margin-top: 0.2rem;
-            word-break: break-all;
-        }
-
-        .pilar.destacado {
-            border-left: 2px solid #2a5a3a;
-            border-right: 2px solid #2a5a3a;
-        }
-
-        /* ===== ANCLAJE Y WHITEPAPER ===== */
-        .anclaje-row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            background: #0d1618;
-            padding: 0.6rem 1.2rem;
-            border-radius: 40px;
-            border: 1px solid #1a2a22;
-            margin-bottom: 1.8rem;
-            font-size: 0.7rem;
-            gap: 0.5rem;
-        }
-
-        .anclaje-row .label {
-            color: #4a7a4a;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .anclaje-row .value {
-            color: #b0e6b0;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .anclaje-row .tx {
-            color: #6a9a6a;
             font-size: 0.65rem;
+            color: var(--muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
-
-        .anclaje-row .whitepaper {
-            background: #1a2a22;
-            padding: 0.2rem 1rem;
-            border-radius: 30px;
-            border: 1px solid #2a5a3a;
-            color: #8fdf8f;
-            text-decoration: none;
-            font-size: 0.7rem;
-        }
-
-        .anclaje-row .whitepaper:hover {
-            background: #2a4a3a;
-        }
-
-        /* ===== INFO FUNDACIONAL ===== */
-        .fundacional {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.2rem 2.5rem;
-            background: #0d1416;
-            padding: 0.8rem 1.5rem;
-            border-radius: 14px;
-            border: 1px solid #1a2a22;
-            margin-bottom: 1.8rem;
+        .pilar .id {
             font-size: 0.8rem;
+            font-weight: 600;
+            color: #fff;
+            display: block;
+            margin-top: 0.2rem;
+        }
+        .pilar.destacado {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.05);
         }
 
-        .fundacional span {
-            color: #7fbf7f;
+        /* ─── MÓDULOS ─── */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
         }
+        @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
 
-        .fundacional .num {
-            color: #c0ffc0;
-            font-weight: 700;
-            letter-spacing: 1px;
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
         }
-
-        /* ===== GENERADOR (TOOL) ===== */
-        .tool-section {
-            background: #0a1212;
-            padding: 1.5rem 1.5rem 1.2rem;
-            border-radius: 16px;
-            border: 1px solid #1a2a22;
-            margin-bottom: 1.8rem;
-        }
-
-        .tool-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .tool-header h2 {
-            font-weight: 400;
+        .card h3 {
             font-size: 1rem;
+            margin-bottom: 0.8rem;
+            color: #fff;
             letter-spacing: 1px;
-            color: #8fdf8f;
+        }
+        .card label {
+            font-size: 0.75rem;
+            color: var(--muted);
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+        .card input {
+            width: 100%;
+            padding: 0.6rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: #0e0e0e;
+            color: #eaeaea;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+        .card input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        .btn {
+            background: var(--gold);
+            color: #0a0a0a;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.85rem;
+        }
+        .btn:hover { background: var(--gold-light); transform: scale(1.02); }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--muted);
+        }
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: #fff;
         }
 
-        .tool-header .version {
-            font-size: 0.6rem;
-            color: #4a7a4a;
-            background: #0a1212;
-            padding: 0.1rem 0.8rem;
-            border-radius: 30px;
-            border: 1px solid #1a2a22;
+        /* ─── LED Y RESULTADOS ─── */
+        .result-box {
+            margin-top: 0.8rem;
+            padding: 0.8rem;
+            border-radius: 6px;
+            background: #0e0e0e;
+            font-size: 0.85rem;
+            min-height: 50px;
+            color: var(--muted);
+            border-left: 3px solid var(--border);
         }
-
-        .status-row {
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-            background: #0d1416;
-            padding: 0.5rem 1.2rem;
-            border-radius: 40px;
-            border: 1px solid #1a2a22;
-            margin-bottom: 1.2rem;
-            flex-wrap: wrap;
-        }
+        .result-box .green { border-color: #4caf50; color: #4caf50; }
+        .result-box .red { border-color: #f44336; color: #f44336; }
+        .result-box .gold { border-color: var(--gold); color: var(--gold); }
 
         .led {
             display: inline-block;
-            width: 16px;
-            height: 16px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            background: #00cc44;
-            box-shadow: 0 0 14px #00cc44aa;
-            transition: 0.2s;
-            flex-shrink: 0;
+            margin-right: 8px;
+            vertical-align: middle;
         }
+        .led.green { background: #4caf50; box-shadow: 0 0 8px #4caf50; }
+        .led.red { background: #f44336; box-shadow: 0 0 8px #f44336; }
+        .led.gold { background: var(--gold); box-shadow: 0 0 8px var(--gold); }
 
-        .led.rojo {
-            background: #cc3333;
-            box-shadow: 0 0 14px #cc3333aa;
-        }
-
-        .folio-actual {
-            font-weight: 600;
-            font-size: 1.1rem;
-            background: #0a1212;
-            padding: 0.1rem 1rem;
-            border-radius: 30px;
-            border: 1px solid #1a2a22;
-        }
-
-        .hash-display {
-            font-size: 0.65rem;
-            color: #6a9a6a;
-            background: #0a1212;
-            padding: 0.2rem 0.8rem;
-            border-radius: 30px;
-            border: 1px solid #1a2a22;
-            word-break: break-all;
-            flex: 1;
-            min-width: 120px;
-        }
-
-        .qr-actions {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .qr-box {
-            background: #fff;
-            padding: 4px;
-            border-radius: 8px;
-            width: 100px;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .qr-box img {
-            width: 100%;
-            height: 100%;
-            image-rendering: pixelated;
-        }
-
-        .btn-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            flex: 1;
-        }
-
-        .btn {
-            background: transparent;
-            border: 1px solid #2a4a3a;
-            color: #b0e6b0;
-            padding: 0.3rem 1.2rem;
-            border-radius: 30px;
-            font-family: inherit;
+        .hash-preview {
+            font-family: 'Courier New', monospace;
             font-size: 0.7rem;
-            cursor: pointer;
-            transition: 0.15s;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .btn:hover {
-            background: #1a2a22;
-            border-color: #4a8a4a;
-            box-shadow: 0 0 12px #1a4a2a55;
-        }
-
-        .btn-primary {
-            background: #1a2a22;
-            border-color: #3a7a3a;
-        }
-
-        .btn-primary:hover {
-            background: #2a4a3a;
-        }
-
-        .btn-danger {
-            border-color: #5a3a3a;
-            color: #ff9a9a;
-        }
-
-        .btn-danger:hover {
-            background: #2a1a1a;
-            border-color: #8a5555;
-        }
-
-        /* ===== VERIFICADOR ===== */
-        .verifier {
-            background: #0d1416;
-            padding: 1.2rem 1.5rem;
-            border-radius: 14px;
-            border: 1px solid #1a2a22;
-            margin-bottom: 1.8rem;
-        }
-
-        .verifier h3 {
-            font-weight: 400;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            margin-bottom: 0.6rem;
-            color: #6a9a6a;
-        }
-
-        .verifier .input-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-        }
-
-        .verifier input {
-            flex: 1;
-            background: #0a1212;
-            border: 1px solid #1a2a22;
-            color: #b0e6b0;
-            padding: 0.3rem 1rem;
-            border-radius: 30px;
-            font-family: inherit;
-            font-size: 0.8rem;
-            min-width: 180px;
-        }
-
-        .verifier input:focus {
-            outline: none;
-            border-color: #3a7a3a;
-        }
-
-        .verifier .result {
-            margin-top: 0.8rem;
-            font-size: 0.8rem;
-            background: #0a1212;
-            padding: 0.4rem 1rem;
-            border-radius: 30px;
-            border: 1px solid #1a2a22;
-            min-height: 2.4rem;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-        }
-
-        .small-led {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            display: inline-block;
-            background: #333;
-            flex-shrink: 0;
-        }
-
-        .small-led.green {
-            background: #00cc44;
-            box-shadow: 0 0 8px #00cc44aa;
-        }
-
-        .small-led.red {
-            background: #cc3333;
-            box-shadow: 0 0 8px #cc3333aa;
-        }
-
-        /* ===== LEGAL Y FOOTER ===== */
-        .legal {
-            font-size: 0.55rem;
-            color: #4a6a4a;
-            border-top: 1px solid #1a2a22;
-            padding-top: 1.2rem;
+            color: var(--muted);
+            word-break: break-all;
+            background: #0a0a0a;
+            padding: 0.4rem;
+            border-radius: 4px;
             margin-top: 0.5rem;
-            text-align: center;
+        }
+
+        /* ─── LEGAL ─── */
+        .legal {
+            margin-top: 2.5rem;
+            padding: 1.5rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.7rem;
+            color: var(--muted);
             line-height: 1.8;
-            letter-spacing: 0.3px;
         }
-
-        .legal strong {
-            color: #6a8a6a;
-        }
-
-        .legal a {
-            color: #6a9a6a;
-            text-decoration: none;
-            border-bottom: 1px dotted #2a4a3a;
-        }
-
-        .legal a:hover {
-            color: #b0e6b0;
-        }
-
-        .footer-links {
+        .legal strong { color: #888; }
+        .legal .footer-links {
             display: flex;
+            gap: 1rem;
             justify-content: center;
-            gap: 1.2rem;
-            font-size: 0.65rem;
-            margin: 0.4rem 0 0.2rem;
             flex-wrap: wrap;
+            margin-top: 0.8rem;
+            font-size: 0.65rem;
+        }
+        .legal .footer-links span { color: #444; }
+
+        /* ─── FOOTER ─── */
+        footer {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #444;
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+        footer a { color: var(--gold); }
+
+        .version-tag {
+            display: inline-block;
+            background: #1a1a1a;
+            color: var(--muted);
+            padding: 0.15rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.6rem;
+            letter-spacing: 1px;
         }
 
-        .footer-links span {
-            color: #3a5a3a;
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 700px) {
-            .container {
-                padding: 1.2rem;
-            }
-            .pilares {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 0.3rem;
-            }
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.4rem;
-            }
-            .header-right {
-                text-align: left;
-                width: 100%;
-            }
-            .qr-actions {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .qr-box {
-                align-self: center;
-            }
-            .btn-group {
-                justify-content: center;
-            }
-            .anclaje-row {
-                flex-direction: column;
-                align-items: flex-start;
-                border-radius: 16px;
-            }
-            .fundacional {
-                flex-direction: column;
-                gap: 0.3rem;
-            }
-            .status-row {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
-
+        /* ─── RESPONSIVE ─── */
         @media (max-width: 480px) {
-            .pilares {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .logo { font-size: 1.8rem; }
+            .pilares { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 <body>
-
 <div class="container">
 
-    <!-- ===== HEADER ===== -->
-    <div class="header">
-        <div class="header-left">
-            <h1>⬡ KRONOS MX CORE</h1>
-            <span class="sub">TESIS · LEGADO 2099 · PROTOCOLO B5 UNIFICADO</span>
+    <!-- ═══ HEADER ═══ -->
+    <header>
+        <div class="logo">
+            ⬡ SWRIA QUANTUM REGISTRY
+            <small>IDENTIDAD DIGITAL · TRAZABILIDAD · INTEGRIDAD EMPRESARIAL</small>
         </div>
-        <div class="header-right">
-            <span class="badge">VERDE 0 · ACTIVO</span>
-            <div class="tesis-tag">NIVEL PRIMUS XII · ANCLAJE ETEREO</div>
+        <div class="badge">SISTEMA PRIVADO ACTIVO</div>
+        <div class="version-tag">ARQUITECTURA EMPRESARIAL · VERIFICACIÓN DIGITAL</div>
+        <div style="margin-top:0.5rem; font-size:0.65rem; color:#444;">
+            Registro privado · Integridad SHA-256 · Trazabilidad empresarial
         </div>
-    </div>
+    </header>
 
-    <!-- ===== PILARES ARQUITECTÓNICOS ===== -->
+    <!-- ═══ PILARES ═══ -->
     <div class="pilares">
         <div class="pilar">
-            <div class="nombre">ACTA</div>
-            <span class="id">2607086319439</span>
+            <div class="nombre">IDENTIDAD</div>
+            <span class="id">ID-EMPRESA</span>
         </div>
         <div class="pilar">
-            <div class="nombre">ARQ</div>
-            <span class="id">2607146379465</span>
+            <div class="nombre">REGISTRO</div>
+            <span class="id">FOLIO-ÚNICO</span>
         </div>
         <div class="pilar destacado">
-            <div class="nombre">SELLO</div>
-            <span class="id">2608056639878</span>
+            <div class="nombre">INTEGRIDAD</div>
+            <span class="id">HASH-SHA256</span>
         </div>
         <div class="pilar">
-            <div class="nombre">PROTOCOLO</div>
-            <span class="id">2608096674952</span>
+            <div class="nombre">AUDITORÍA</div>
+            <span class="id">TRAZABILIDAD</span>
         </div>
         <div class="pilar">
-            <div class="nombre">CONSTITUCIÓN</div>
-            <span class="id">72258 62335</span>
+            <div class="nombre">EVIDENCIA</div>
+            <span class="id">SELLO-TEMPORAL</span>
         </div>
     </div>
 
-    <!-- ===== ANCLAJE Y WHITEPAPER ===== -->
-    <div class="anclaje-row">
-        <span class="label">⧫ Anclaje Etereum</span>
-        <span class="value">2608096674952</span>
-        <span class="tx">TX: 0x8ca8... | 0xd2c2... | 0xd94b... | 0x7ef5...</span>
-        <a href="#" class="whitepaper" onclick="alert('FDV-2026-OBRA-EL-OJO-SAGRADO-V2 · Whitepaper de la tesis')">📄 FDV-2026-OBRA-EL-OJO-SAGRADO-V2</a>
-    </div>
+    <!-- ═══ GRID DE MÓDULOS ═══ -->
+    <div class="grid">
 
-    <!-- ===== ID FUNDACIONAL ===== -->
-    <div class="fundacional">
-        <span><span class="num">72258 62335</span> · ID Fundacional</span>
-        <span><span class="num">KR-0001</span> · Constancia Fundador</span>
-        <span><span class="num">B5</span> · Unificado</span>
-        <span>Fábrica: <span class="num">FVD-(MARCA)</span></span>
-    </div>
-
-    <!-- ===== HERRAMIENTA GENERADOR / VERIFICADOR (TESIS) ===== -->
-    <div class="tool-section">
-        <div class="tool-header">
-            <h2>✦ GENERADOR KRMV v2.1 · FOLIO UNIVERSAL</h2>
-            <span class="version">Lógica irreversible · Correlativo único</span>
+        <!-- GENERADOR DE REGISTROS -->
+        <div class="card">
+            <h3>📋 GENERAR REGISTRO</h3>
+            <label>Número de folio (ej. 1, 100, 1000)</label>
+            <input type="number" id="folioNumero" value="1" min="1" />
+            <button class="btn" id="btnGenerar">Crear registro</button>
+            <div id="resultadoGenerar" class="result-box">Listo para generar un registro.</div>
         </div>
 
-        <!-- Estado -->
-        <div class="status-row">
-            <span class="led" id="led"></span>
-            <span id="estadoTexto" style="font-weight:600;">ACTIVO</span>
-            <span class="folio-actual" id="folioDisplay">KRMV-KRONOS-0000001</span>
-            <span class="hash-display" id="hashDisplay">—</span>
+        <!-- VERIFICADOR DE REGISTROS -->
+        <div class="card">
+            <h3>🔍 VERIFICAR REGISTRO</h3>
+            <label>Folio completo (ej. SWRIA-QREG-00000001)</label>
+            <input type="text" id="folioVerificar" placeholder="SWRIA-QREG-00000001" />
+            <button class="btn" id="btnVerificar">Consultar integridad</button>
+            <div id="resultadoVerificar" class="result-box">Ingresa un folio para verificar.</div>
         </div>
 
-        <!-- QR y botones -->
-        <div class="qr-actions">
-            <div class="qr-box">
-                <img id="qrImg" src="" alt="QR" />
-            </div>
-            <div class="btn-group">
-                <button class="btn btn-primary" id="btnNuevo">✦ GENERAR NUEVO</button>
-                <button class="btn" id="btnDescargarJSON">⬇ DESCARGAR JSON</button>
-                <button class="btn btn-danger" id="btnReset">⟲ RESET</button>
-            </div>
+    </div>
+
+    <!-- ═══ VISOR DE REGISTROS ═══ -->
+    <div class="card" style="margin-top:1.5rem;">
+        <h3>📜 ÚLTIMOS REGISTROS</h3>
+        <div id="listaRegistros" style="font-size:0.8rem; color:var(--muted); max-height:200px; overflow-y:auto;">
+            <div style="color:#444;">No hay registros guardados aún.</div>
         </div>
     </div>
 
-    <!-- ===== VERIFICADOR ===== -->
-    <div class="verifier">
-        <h3>🔍 VERIFICAR ESTADO 0/1 · ANCLAJE 2608096674952</h3>
-        <div class="input-row">
-            <input type="text" id="inputVerificar" placeholder="Ej. KRMV-KRONOS-0000001" value="KRMV-KRONOS-0000001" />
-            <button class="btn btn-primary" id="btnVerificar">CONSULTAR</button>
-        </div>
-        <div class="result" id="resultadoVerificacion">
-            <span class="small-led" id="ledVerif"></span>
-            <span id="textoVerif">Ingresa un folio y presiona Consultar</span>
-        </div>
-    </div>
-
-    <!-- ===== LEGAL ===== -->
+    <!-- ═══ AVISO LEGAL ═══ -->
     <div class="legal">
-        <p><strong>AVISO LEGAL — ENTIDAD PRIVADA NO GUBERNAMENTAL</strong></p>
+        <strong>AVISO LEGAL Y CONDICIONES DE USO</strong>
         <p>
-            Entidad Tecnológica Privada Kronos MX Core. No gubernamental. No emite documentos oficiales de identidad (INE, CURP, Pasaporte).<br />
-            Constancias de membresía privada interna. <strong>Registro Safe Creative + Anclaje Ethereum.</strong> Arquitectura Jurídica Activa.
+            SWRIA Quantum Registry es un sistema privado de generación, identificación y verificación
+            de registros digitales para uso empresarial, interno o contractual.
         </p>
+        <p>
+            Los folios, códigos QR, sellos digitales, marcas de tiempo y valores hash generados por esta
+            plataforma sirven como mecanismos de trazabilidad e integridad de información. No sustituyen
+            documentos oficiales, certificados gubernamentales, firmas electrónicas cualificadas ni la
+            intervención de fedatarios públicos.
+        </p>
+        <p>
+            La validez jurídica de cada registro dependerá de la legislación aplicable, de la identidad
+            de las partes, de la autorización correspondiente y de los contratos o políticas internas
+            que regulen su utilización.
+        </p>
+        <p>
+            SWRIA no garantiza que un registro digital constituya por sí mismo prueba plena ante una
+            autoridad. Para usos contractuales, probatorios o regulatorios, se recomienda complementar
+            el sistema con firma electrónica avanzada, control de acceso, conservación de evidencias,
+            auditoría y respaldo institucional.
+        </p>
+        <p>Este sistema no emite documentos de identidad, licencias, certificaciones gubernamentales
+        ni acreditaciones oficiales.</p>
         <div class="footer-links">
-            <span>TX verificables: 0x8ca8... | 0xd2c2... | 0xd94b... | 0x7ef5... → ETHERSCAN</span>
-            <a href="https://kronosproyect.github.io" target="_blank">kronosproyect.github.io</a>
+            <span>Registro privado empresarial</span>
             <span>|</span>
-            <span>Protocolo B5 · Constitución</span>
+            <span>Control de integridad digital</span>
+            <span>|</span>
+            <span>Uso sujeto a jurisdicción aplicable</span>
         </div>
     </div>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer>
+        <p>© 2026 SWRIA · Identidad Digital Empresarial · Tecnología de trazabilidad</p>
+        <p style="margin-top:0.3rem; font-size:0.6rem; color:#333;">
+            <a href="#">Términos de uso</a> · <a href="#">Política de privacidad</a> · <a href="#">Contacto</a>
+        </p>
+    </footer>
+
 </div>
 
 <script>
-    (function() {
-        // ===== ESTADO =====
-        const BASE = 'KRMV-KRONOS-';
-        const STORAGE_KEY = 'kronos_tesis_registry';
+    // ─────────────────────────────────────────────────────────────
+    // SWRIA QUANTUM REGISTRY - LÓGICA EMPRESARIAL
+    // ─────────────────────────────────────────────────────────────
 
-        let currentNum = 1;
+    const STORAGE_KEY = 'swria_registry_v1';
+    const BASE = 'SWRIA-QREG-';
 
-        // Cargar último número
-        function loadNum() {
-            try {
-                const raw = localStorage.getItem(STORAGE_KEY);
-                if (raw) {
-                    const data = JSON.parse(raw);
-                    if (data && typeof data.ultimo === 'number') {
-                        currentNum = data.ultimo;
-                    }
-                }
-            } catch (_) {}
+    // Utilidad: SHA-256 en el navegador
+    async function sha256(message) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(message);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // Obtener el registro completo desde localStorage
+    function getRegistry() {
+        try {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+        } catch {
+            return {};
+        }
+    }
+
+    // Guardar el registro en localStorage
+    function saveRegistry(registry) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(registry));
+    }
+
+    // Crear un nuevo registro
+    async function crearRegistro(numero) {
+        if (!numero || numero < 1) {
+            throw new Error('Número inválido. Debe ser mayor a 0.');
         }
 
-        function saveNum() {
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify({ ultimo: currentNum }));
-            } catch (_) {}
+        const folio = `${BASE}${String(numero).padStart(8, '0')}`;
+        const timestamp = new Date().toISOString();
+        const raw = `${folio}|${timestamp}`;
+        const hash = await sha256(raw);
+
+        const registry = getRegistry();
+
+        if (registry[folio]) {
+            throw new Error(`El folio ${folio} ya existe.`);
         }
 
-        function pad(n, len = 7) {
-            return String(n).padStart(len, '0');
+        registry[folio] = {
+            folio,
+            timestamp,
+            hash,
+            estado: 'ACTIVO',
+            sistema: 'SWRIA Quantum Registry',
+            version: '1.0'
+        };
+
+        saveRegistry(registry);
+        return registry[folio];
+    }
+
+    // Consultar un registro por su folio
+    function consultarRegistro(folio) {
+        const registry = getRegistry();
+        return registry[folio] || null;
+    }
+
+    // Verificar integridad de un registro
+    async function verificarIntegridad(folio) {
+        const registro = consultarRegistro(folio);
+        if (!registro) return { ok: false, motivo: 'no_encontrado' };
+
+        const raw = `${registro.folio}|${registro.timestamp}`;
+        const hashActual = await sha256(raw);
+
+        if (hashActual !== registro.hash) {
+            return { ok: false, motivo: 'hash_invalido' };
         }
 
-        function getFolio(n) {
-            return BASE + pad(n);
+        return { ok: true, registro };
+    }
+
+    // ─── UI ──────────────────────────────────────────────────────
+
+    function actualizarLista() {
+        const registry = getRegistry();
+        const container = document.getElementById('listaRegistros');
+        const keys = Object.keys(registry);
+
+        if (keys.length === 0) {
+            container.innerHTML = '<div style="color:#444;">No hay registros guardados aún.</div>';
+            return;
         }
 
-        // SHA-256
-        async function sha256(text) {
-            const enc = new TextEncoder();
-            const buf = await crypto.subtle.digest('SHA-256', enc.encode(text));
-            return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+        // Mostrar los últimos 5 registros (más recientes primero)
+        const sorted = keys
+            .map(k => registry[k])
+            .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+            .slice(0, 5);
+
+        container.innerHTML = sorted.map(r => `
+            <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid #1a1a1a;">
+                <span style="color:var(--gold);">${r.folio}</span>
+                <span style="color:#555; font-size:0.7rem;">${r.timestamp.slice(0,10)}</span>
+                <span style="color:${r.estado === 'ACTIVO' ? '#4caf50' : '#f44336'}; font-size:0.7rem;">${r.estado}</span>
+            </div>
+        `).join('');
+    }
+
+    // ─── EVENTOS ──────────────────────────────────────────────────
+
+    // Generar registro
+    document.getElementById('btnGenerar').addEventListener('click', async () => {
+        const input = document.getElementById('folioNumero');
+        const output = document.getElementById('resultadoGenerar');
+        const numero = parseInt(input.value);
+
+        if (!numero || numero < 1) {
+            output.innerHTML = '<span class="red">⚠️ Ingresa un número válido (mayor a 0).</span>';
+            return;
         }
 
-        function nowISO() {
-            return new Date().toISOString();
+        try {
+            const registro = await crearRegistro(numero);
+            output.innerHTML = `
+                <span class="green">✅ Registro creado correctamente</span><br>
+                <strong>${registro.folio}</strong><br>
+                <span style="font-size:0.7rem; color:#555;">Hash: ${registro.hash.slice(0, 24)}…</span>
+            `;
+            actualizarLista();
+        } catch (err) {
+            output.innerHTML = `<span class="red">❌ ${err.message}</span>`;
+        }
+    });
+
+    // Verificar registro
+    document.getElementById('btnVerificar').addEventListener('click', async () => {
+        const input = document.getElementById('folioVerificar');
+        const output = document.getElementById('resultadoVerificar');
+        const folio = input.value.trim().toUpperCase();
+
+        if (!folio) {
+            output.innerHTML = '<span class="red">⚠️ Ingresa un folio para verificar.</span>';
+            return;
         }
 
-        // ===== UI =====
-        async function render(num) {
-            const folio = getFolio(num);
-            const ts = nowISO();
-            const hash = await sha256(folio + ts);
+        const resultado = await verificarIntegridad(folio);
 
-            document.getElementById('folioDisplay').textContent = folio;
-            document.getElementById('hashDisplay').textContent = hash;
-            document.getElementById('inputVerificar').value = folio;
-
-            // LED verde siempre (simula activo)
-            const led = document.getElementById('led');
-            led.className = 'led';
-            document.getElementById('estadoTexto').textContent = 'ACTIVO · VERDE 0';
-
-            // QR
-            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(folio)}`;
-            document.getElementById('qrImg').src = qrUrl;
-
-            saveNum();
-        }
-
-        // ===== ACCIONES =====
-        async function nuevo() {
-            currentNum += 1;
-            await render(currentNum);
-        }
-
-        async function reset() {
-            if (confirm('¿Restablecer al folio inicial KRMV-KRONOS-0000001?')) {
-                currentNum = 1;
-                await render(1);
-            }
-        }
-
-        async function descargarJSON() {
-            const num = currentNum;
-            const folio = getFolio(num);
-            const ts = nowISO();
-            const hash = await sha256(folio + ts);
-
-            const obj = {
-                folio: folio,
-                hash: hash,
-                timestamp: ts,
-                titular: 'Titular Privado',
-                marca: 'KRONOS',
-                fabricante: 'Kronos MX Core - ID 7225862335 - Toluca HQ',
-                vigencia: '2027-08-14',
-                estado: 0,
-                anclaje: '2608096674952',
-                whitepaper: 'FDV-2026-OBRA-EL-OJO-SAGRADO-V2',
-                protocolo: 'B5 Unificado',
-                id_fundacional: '72258 62335'
-            };
-
-            const blob = new Blob([JSON.stringify(obj, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `${folio}.json`;
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-
-        async function verificar() {
-            const input = document.getElementById('inputVerificar').value.trim();
-            const led = document.getElementById('ledVerif');
-            const texto = document.getElementById('textoVerif');
-
-            if (!input) {
-                led.className = 'small-led';
-                texto.textContent = '❌ Ingresa un folio.';
-                return;
-            }
-
-            const match = input.match(/KRMV-KRONOS-(\d+)/);
-            if (!match) {
-                led.className = 'small-led red';
-                texto.textContent = '❌ Formato inválido. Debe ser KRMV-KRONOS-000000X';
-                return;
-            }
-
-            const num = parseInt(match[1], 10);
-            if (num > 0 && num <= currentNum) {
-                const ts = nowISO();
-                const hash = await sha256(input + ts);
-                led.className = 'small-led green';
-                texto.innerHTML = `✅ <strong>${input}</strong> existe en el registro. Hash: <span style="font-size:0.65rem;">${hash.slice(0, 20)}…</span> (VERDE 0 · ACTIVO)`;
+        if (!resultado.ok) {
+            if (resultado.motivo === 'no_encontrado') {
+                output.innerHTML = `<span class="red">❌ Registro no encontrado en esta instalación.</span>`;
             } else {
-                led.className = 'small-led red';
-                texto.textContent = `❌ ${input} — NO ENCONTRADO (ROJO 1) · No existe en el registro.`;
+                output.innerHTML = `<span class="red">❌ Alerta: la integridad del registro no pudo ser confirmada.</span>`;
             }
+            return;
         }
 
-        // ===== INIT =====
-        async function init() {
-            loadNum();
-            if (currentNum < 1) currentNum = 1;
-            await render(currentNum);
+        const r = resultado.registro;
+        output.innerHTML = `
+            <span class="green">✅ <strong>${r.folio}</strong> · Registro auténtico</span><br>
+            <span style="font-size:0.75rem; color:#555;">Estado: ${r.estado}</span><br>
+            <span style="font-size:0.7rem; color:#555;">Hash: ${r.hash.slice(0, 24)}…</span>
+        `;
+    });
 
-            document.getElementById('btnNuevo').addEventListener('click', nuevo);
-            document.getElementById('btnReset').addEventListener('click', reset);
-            document.getElementById('btnDescargarJSON').addEventListener('click', descargarJSON);
-            document.getElementById('btnVerificar').addEventListener('click', verificar);
-            document.getElementById('inputVerificar').addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') verificar();
-            });
-        }
+    // Cargar lista al iniciar
+    actualizarLista();
 
-        init();
-    })();
+    // Enter para generar y verificar
+    document.getElementById('folioNumero').addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') document.getElementById('btnGenerar').click();
+    });
+    document.getElementById('folioVerificar').addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') document.getElementById('btnVerificar').click();
+    });
 </script>
-
 </body>
 </html>
